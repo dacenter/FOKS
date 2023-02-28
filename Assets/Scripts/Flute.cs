@@ -1,10 +1,9 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Flute : MonoBehaviour
 {
-    public const float MULTIPLIER = 1.0594630944f;
+    public const float Multiplier = 1.0594630944f;
     
     [SerializeField] private float AttckPitchTime;
 
@@ -12,10 +11,8 @@ public class Flute : MonoBehaviour
 
     [SerializeField] private float ReleaseVolumeTime;
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-    }
+    [SerializeField] private AudioSource AudioSource;
+
 
     // Update is called once per frame
     private void Update()
@@ -52,9 +49,11 @@ public class Flute : MonoBehaviour
 
     private void PlayNote(int shift)
     {
-            GetComponent<AudioSource>().DOFade(0.8f+Random.Range(-0.2f, 0.2f), AttackVolumeTime);
-
-            GetComponent<AudioSource>().DOPitch(Mathf.Pow(MULTIPLIER, shift), AttckPitchTime);
+        float volume = 0.8f+Random.Range(-0.2f, 0.2f);
+        float pitch = Mathf.Pow(Multiplier, shift);
+        
+        AudioSource.DOFade(volume, AttackVolumeTime);
+        AudioSource.DOPitch(pitch, AttckPitchTime);
         
     }
 }
