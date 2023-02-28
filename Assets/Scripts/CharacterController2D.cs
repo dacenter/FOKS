@@ -53,7 +53,7 @@ public class CharacterController2D : MonoBehaviour
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
         var colliders = Physics2D.OverlapCircleAll(GroundCheck.position, GroundedRadius, WhatIsGround);
-        Debug.Log(colliders.Length);
+        //Debug.Log(colliders.Length);
         foreach (Collider2D col in colliders)
         {
             if (col.gameObject == gameObject) continue;

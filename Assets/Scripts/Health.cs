@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,6 +22,10 @@ public class Health:MonoBehaviour
 
         return CurrentHP;
     }
-    
-    
+
+    private void Update()
+    {
+        CurrentHP += 0.3f*Time.deltaTime;
+        if (CurrentHP >= MaxHP) CurrentHP = MaxHP;
+    }
 }

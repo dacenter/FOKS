@@ -1,0 +1,5 @@
+<MainGameView xmlns="Delight" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="Delight ../Delight.xsd"  StoryText="t:string" Showing = "t:bool=true" EnableScriptEvents="True">
+    <Region Width="100%" Height="25%" BackgroundSprite="Pxiel Art UI borders_0" Alignment="Top" Margin="10px, 10px, 10px, 10px" IsVisible="{Showing}">
+        <Label Text="{StoryText}" FontColor="#ffffffff" Width="80%" Height="60%" Click="Continue" TextAlignment="TopLeft" FontSize="24" Font="Fifaks10Dev1"/>
+    </Region>
+</MainGameView>
