@@ -21,12 +21,15 @@ namespace Delight
 
             // constructing Button (Button1)
             Button1 = new Button(this, this, "Button1", Button1Template);
+            Button1.Click.RegisterHandler(this, "StartGame");
 
             // constructing Button (Button2)
             Button2 = new Button(this, this, "Button2", Button2Template);
+            Button2.Click.RegisterHandler(this, "Settings");
 
             // constructing Button (Button3)
             Button3 = new Button(this, this, "Button3", Button3Template);
+            Button3.Click.RegisterHandler(this, "Exit");
             this.AfterInitializeInternal();
         }
 
@@ -152,10 +155,11 @@ namespace Delight
                     _mainMenuViewButton1.LineNumber = 3;
                     _mainMenuViewButton1.LinePosition = 6;
 #endif
-                    Delight.Button.WidthProperty.SetDefault(_mainMenuViewButton1, new ElementSize(0.5f, ElementSizeUnit.Percents));
-                    Delight.Button.HeightProperty.SetDefault(_mainMenuViewButton1, new ElementSize(0.25f, ElementSizeUnit.Percents));
                     Delight.Button.BackgroundSpriteProperty.SetDefault(_mainMenuViewButton1, Assets.Sprites["Pxiel Art UI borders_0"]);
-                    Delight.Button.AlignmentProperty.SetDefault(_mainMenuViewButton1, Delight.ElementAlignment.Top);
+                    Delight.Button.BackgroundColorProperty.SetStateDefault("Pressed", _mainMenuViewButton1, new UnityEngine.Color(0.6901961f, 0.1882353f, 0.3607843f, 1f));
+                    Delight.Button.WidthProperty.SetDefault(_mainMenuViewButton1, new ElementSize(0.5f, ElementSizeUnit.Percents));
+                    Delight.Button.HeightProperty.SetDefault(_mainMenuViewButton1, new ElementSize(75f, ElementSizeUnit.Pixels));
+                    Delight.Button.AlignmentProperty.SetDefault(_mainMenuViewButton1, Delight.ElementAlignment.Center);
                     Delight.Button.MarginProperty.SetDefault(_mainMenuViewButton1, new ElementMargin(new ElementSize(10f, ElementSizeUnit.Pixels), new ElementSize(10f, ElementSizeUnit.Pixels), new ElementSize(10f, ElementSizeUnit.Pixels), new ElementSize(10f, ElementSizeUnit.Pixels)));
                     Delight.Button.LabelTemplateProperty.SetDefault(_mainMenuViewButton1, MainMenuViewButton1Label);
                 }
@@ -180,10 +184,12 @@ namespace Delight
                     _mainMenuViewButton1Label.LineNumber = 15;
                     _mainMenuViewButton1Label.LinePosition = 4;
 #endif
-                    Delight.Label.TextProperty.SetDefault(_mainMenuViewButton1Label, "НАЧАТЬ");
                     Delight.Label.FontSizeProperty.SetDefault(_mainMenuViewButton1Label, 24);
                     Delight.Label.FontColorProperty.SetDefault(_mainMenuViewButton1Label, new UnityEngine.Color(1f, 1f, 1f, 1f));
                     Delight.Label.FontProperty.SetDefault(_mainMenuViewButton1Label, Assets.Fonts["Fifaks10Dev1"]);
+                    Delight.Label.FontColorProperty.SetStateDefault("Highlighted", _mainMenuViewButton1Label, new UnityEngine.Color(1f, 0.8941177f, 0.4705882f, 1f));
+                    Delight.Label.FontSizeProperty.SetStateDefault("Highlighted", _mainMenuViewButton1Label, 30);
+                    Delight.Label.TextProperty.SetDefault(_mainMenuViewButton1Label, "НАЧАТЬ");
                 }
                 return _mainMenuViewButton1Label;
             }
@@ -203,14 +209,15 @@ namespace Delight
                     _mainMenuViewButton2 = new Template(ButtonTemplates.Button);
 #if UNITY_EDITOR
                     _mainMenuViewButton2.Name = "MainMenuViewButton2";
-                    _mainMenuViewButton2.LineNumber = 6;
+                    _mainMenuViewButton2.LineNumber = 7;
                     _mainMenuViewButton2.LinePosition = 6;
 #endif
-                    Delight.Button.WidthProperty.SetDefault(_mainMenuViewButton2, new ElementSize(0.5f, ElementSizeUnit.Percents));
-                    Delight.Button.HeightProperty.SetDefault(_mainMenuViewButton2, new ElementSize(0.25f, ElementSizeUnit.Percents));
                     Delight.Button.BackgroundSpriteProperty.SetDefault(_mainMenuViewButton2, Assets.Sprites["Pxiel Art UI borders_0"]);
+                    Delight.Button.BackgroundColorProperty.SetStateDefault("Pressed", _mainMenuViewButton2, new UnityEngine.Color(0.6901961f, 0.1882353f, 0.3607843f, 1f));
+                    Delight.Button.WidthProperty.SetDefault(_mainMenuViewButton2, new ElementSize(0.2f, ElementSizeUnit.Percents));
+                    Delight.Button.HeightProperty.SetDefault(_mainMenuViewButton2, new ElementSize(100f, ElementSizeUnit.Pixels));
                     Delight.Button.AlignmentProperty.SetDefault(_mainMenuViewButton2, Delight.ElementAlignment.BottomLeft);
-                    Delight.Button.MarginProperty.SetDefault(_mainMenuViewButton2, new ElementMargin(new ElementSize(10f, ElementSizeUnit.Pixels), new ElementSize(10f, ElementSizeUnit.Pixels), new ElementSize(10f, ElementSizeUnit.Pixels), new ElementSize(10f, ElementSizeUnit.Pixels)));
+                    Delight.Button.MarginProperty.SetDefault(_mainMenuViewButton2, new ElementMargin(new ElementSize(50f, ElementSizeUnit.Pixels), new ElementSize(0f, ElementSizeUnit.Pixels), new ElementSize(0f, ElementSizeUnit.Pixels), new ElementSize(50f, ElementSizeUnit.Pixels)));
                     Delight.Button.LabelTemplateProperty.SetDefault(_mainMenuViewButton2, MainMenuViewButton2Label);
                 }
                 return _mainMenuViewButton2;
@@ -234,10 +241,12 @@ namespace Delight
                     _mainMenuViewButton2Label.LineNumber = 15;
                     _mainMenuViewButton2Label.LinePosition = 4;
 #endif
-                    Delight.Label.TextProperty.SetDefault(_mainMenuViewButton2Label, "НАСТРОЙКИ");
                     Delight.Label.FontSizeProperty.SetDefault(_mainMenuViewButton2Label, 24);
                     Delight.Label.FontColorProperty.SetDefault(_mainMenuViewButton2Label, new UnityEngine.Color(1f, 1f, 1f, 1f));
                     Delight.Label.FontProperty.SetDefault(_mainMenuViewButton2Label, Assets.Fonts["Fifaks10Dev1"]);
+                    Delight.Label.FontColorProperty.SetStateDefault("Highlighted", _mainMenuViewButton2Label, new UnityEngine.Color(1f, 0.8941177f, 0.4705882f, 1f));
+                    Delight.Label.FontSizeProperty.SetStateDefault("Highlighted", _mainMenuViewButton2Label, 30);
+                    Delight.Label.TextProperty.SetDefault(_mainMenuViewButton2Label, "НАСТРОЙКИ");
                 }
                 return _mainMenuViewButton2Label;
             }
@@ -257,14 +266,15 @@ namespace Delight
                     _mainMenuViewButton3 = new Template(ButtonTemplates.Button);
 #if UNITY_EDITOR
                     _mainMenuViewButton3.Name = "MainMenuViewButton3";
-                    _mainMenuViewButton3.LineNumber = 9;
+                    _mainMenuViewButton3.LineNumber = 11;
                     _mainMenuViewButton3.LinePosition = 6;
 #endif
-                    Delight.Button.WidthProperty.SetDefault(_mainMenuViewButton3, new ElementSize(0.5f, ElementSizeUnit.Percents));
-                    Delight.Button.HeightProperty.SetDefault(_mainMenuViewButton3, new ElementSize(0.25f, ElementSizeUnit.Percents));
                     Delight.Button.BackgroundSpriteProperty.SetDefault(_mainMenuViewButton3, Assets.Sprites["Pxiel Art UI borders_0"]);
+                    Delight.Button.BackgroundColorProperty.SetStateDefault("Pressed", _mainMenuViewButton3, new UnityEngine.Color(0.6901961f, 0.1882353f, 0.3607843f, 1f));
+                    Delight.Button.WidthProperty.SetDefault(_mainMenuViewButton3, new ElementSize(0.2f, ElementSizeUnit.Percents));
+                    Delight.Button.HeightProperty.SetDefault(_mainMenuViewButton3, new ElementSize(100f, ElementSizeUnit.Pixels));
                     Delight.Button.AlignmentProperty.SetDefault(_mainMenuViewButton3, Delight.ElementAlignment.BottomRight);
-                    Delight.Button.MarginProperty.SetDefault(_mainMenuViewButton3, new ElementMargin(new ElementSize(10f, ElementSizeUnit.Pixels), new ElementSize(10f, ElementSizeUnit.Pixels), new ElementSize(10f, ElementSizeUnit.Pixels), new ElementSize(10f, ElementSizeUnit.Pixels)));
+                    Delight.Button.MarginProperty.SetDefault(_mainMenuViewButton3, new ElementMargin(new ElementSize(0f, ElementSizeUnit.Pixels), new ElementSize(0f, ElementSizeUnit.Pixels), new ElementSize(50f, ElementSizeUnit.Pixels), new ElementSize(50f, ElementSizeUnit.Pixels)));
                     Delight.Button.LabelTemplateProperty.SetDefault(_mainMenuViewButton3, MainMenuViewButton3Label);
                 }
                 return _mainMenuViewButton3;
@@ -288,10 +298,12 @@ namespace Delight
                     _mainMenuViewButton3Label.LineNumber = 15;
                     _mainMenuViewButton3Label.LinePosition = 4;
 #endif
-                    Delight.Label.TextProperty.SetDefault(_mainMenuViewButton3Label, "ВЫХОД");
                     Delight.Label.FontSizeProperty.SetDefault(_mainMenuViewButton3Label, 24);
                     Delight.Label.FontColorProperty.SetDefault(_mainMenuViewButton3Label, new UnityEngine.Color(1f, 1f, 1f, 1f));
                     Delight.Label.FontProperty.SetDefault(_mainMenuViewButton3Label, Assets.Fonts["Fifaks10Dev1"]);
+                    Delight.Label.FontColorProperty.SetStateDefault("Highlighted", _mainMenuViewButton3Label, new UnityEngine.Color(1f, 0.8941177f, 0.4705882f, 1f));
+                    Delight.Label.FontSizeProperty.SetStateDefault("Highlighted", _mainMenuViewButton3Label, 30);
+                    Delight.Label.TextProperty.SetDefault(_mainMenuViewButton3Label, "ВЫХОД");
                 }
                 return _mainMenuViewButton3Label;
             }

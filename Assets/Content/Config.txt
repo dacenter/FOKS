@@ -19,4 +19,5 @@ UseSimulatedUriInEditor: true
 BuildTargets: Dev
 AssetBundleVersion: 1
 ContentFolders:
+    Resources/
 Modules:

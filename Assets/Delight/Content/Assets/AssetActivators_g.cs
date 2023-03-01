@@ -15,15 +15,19 @@ namespace Delight
         static Assets()
         {
             ViewActivators = new Dictionary<string, Func<View, View, string, Template, bool, View>>();
-            ViewActivators.Add("SceneObjectView", (x, y, z, w, a) => new SceneObjectView(x, y, z, w, a));
-            ViewActivators.Add("Button", (x, y, z, w, a) => new Button(x, y, z, w, a));
-            ViewActivators.Add("UIImageView", (x, y, z, w, a) => new UIImageView(x, y, z, w, a));
-            ViewActivators.Add("Label", (x, y, z, w, a) => new Label(x, y, z, w, a));
-            ViewActivators.Add("CanvasRendererView", (x, y, z, w, a) => new CanvasRendererView(x, y, z, w, a));
+            ViewActivators.Add("MainGameView", (x, y, z, w, a) => new MainGameView(x, y, z, w, a));
             ViewActivators.Add("UIView", (x, y, z, w, a) => new UIView(x, y, z, w, a));
+            ViewActivators.Add("Region", (x, y, z, w, a) => new Region(x, y, z, w, a));
+            ViewActivators.Add("Label", (x, y, z, w, a) => new Label(x, y, z, w, a));
+            ViewActivators.Add("MainMenuView", (x, y, z, w, a) => new MainMenuView(x, y, z, w, a));
+            ViewActivators.Add("Button", (x, y, z, w, a) => new Button(x, y, z, w, a));
+            ViewActivators.Add("SelectStageView", (x, y, z, w, a) => new SelectStageView(x, y, z, w, a));
+            ViewActivators.Add("Image", (x, y, z, w, a) => new Image(x, y, z, w, a));
+            ViewActivators.Add("SceneObjectView", (x, y, z, w, a) => new SceneObjectView(x, y, z, w, a));
+            ViewActivators.Add("UIImageView", (x, y, z, w, a) => new UIImageView(x, y, z, w, a));
+            ViewActivators.Add("CanvasRendererView", (x, y, z, w, a) => new CanvasRendererView(x, y, z, w, a));
             ViewActivators.Add("CheckBox", (x, y, z, w, a) => new CheckBox(x, y, z, w, a));
             ViewActivators.Add("Group", (x, y, z, w, a) => new Group(x, y, z, w, a));
-            ViewActivators.Add("Image", (x, y, z, w, a) => new Image(x, y, z, w, a));
             ViewActivators.Add("Collection", (x, y, z, w, a) => new Collection(x, y, z, w, a));
             ViewActivators.Add("ComboBox", (x, y, z, w, a) => new ComboBox(x, y, z, w, a));
             ViewActivators.Add("ComboBoxListItem", (x, y, z, w, a) => new ComboBoxListItem(x, y, z, w, a));
@@ -39,7 +43,6 @@ namespace Delight
             ViewActivators.Add("GridSplitter", (x, y, z, w, a) => new GridSplitter(x, y, z, w, a));
             ViewActivators.Add("GridSplitterHandle", (x, y, z, w, a) => new GridSplitterHandle(x, y, z, w, a));
             ViewActivators.Add("InputField", (x, y, z, w, a) => new InputField(x, y, z, w, a));
-            ViewActivators.Add("Region", (x, y, z, w, a) => new Region(x, y, z, w, a));
             ViewActivators.Add("RectMask2D", (x, y, z, w, a) => new RectMask2D(x, y, z, w, a));
             ViewActivators.Add("LayoutRoot", (x, y, z, w, a) => new LayoutRoot(x, y, z, w, a));
             ViewActivators.Add("NavigationButton", (x, y, z, w, a) => new NavigationButton(x, y, z, w, a));
@@ -72,21 +75,23 @@ namespace Delight
             ViewActivators.Add("TabPanelExample", (x, y, z, w, a) => new TabPanelExample(x, y, z, w, a));
             ViewActivators.Add("TestExample", (x, y, z, w, a) => new TestExample(x, y, z, w, a));
             ViewActivators.Add("MainGameScene", (x, y, z, w, a) => new MainGameScene(x, y, z, w, a));
-            ViewActivators.Add("MainMenuDemoScene", (x, y, z, w, a) => new MainMenuDemoScene(x, y, z, w, a));
-            ViewActivators.Add("MainGameView", (x, y, z, w, a) => new MainGameView(x, y, z, w, a));
             ViewActivators.Add("MainMenuScene", (x, y, z, w, a) => new MainMenuScene(x, y, z, w, a));
-            ViewActivators.Add("MainMenuView", (x, y, z, w, a) => new MainMenuView(x, y, z, w, a));
+            ViewActivators.Add("MainMenuDemoScene", (x, y, z, w, a) => new MainMenuDemoScene(x, y, z, w, a));
 
             ViewTypes = new Dictionary<string, Type>();
-            ViewTypes.Add("SceneObjectView", typeof(SceneObjectView));
-            ViewTypes.Add("Button", typeof(Button));
-            ViewTypes.Add("UIImageView", typeof(UIImageView));
-            ViewTypes.Add("Label", typeof(Label));
-            ViewTypes.Add("CanvasRendererView", typeof(CanvasRendererView));
+            ViewTypes.Add("MainGameView", typeof(MainGameView));
             ViewTypes.Add("UIView", typeof(UIView));
+            ViewTypes.Add("Region", typeof(Region));
+            ViewTypes.Add("Label", typeof(Label));
+            ViewTypes.Add("MainMenuView", typeof(MainMenuView));
+            ViewTypes.Add("Button", typeof(Button));
+            ViewTypes.Add("SelectStageView", typeof(SelectStageView));
+            ViewTypes.Add("Image", typeof(Image));
+            ViewTypes.Add("SceneObjectView", typeof(SceneObjectView));
+            ViewTypes.Add("UIImageView", typeof(UIImageView));
+            ViewTypes.Add("CanvasRendererView", typeof(CanvasRendererView));
             ViewTypes.Add("CheckBox", typeof(CheckBox));
             ViewTypes.Add("Group", typeof(Group));
-            ViewTypes.Add("Image", typeof(Image));
             ViewTypes.Add("Collection", typeof(Collection));
             ViewTypes.Add("ComboBox", typeof(ComboBox));
             ViewTypes.Add("ComboBoxListItem", typeof(ComboBoxListItem));
@@ -102,7 +107,6 @@ namespace Delight
             ViewTypes.Add("GridSplitter", typeof(GridSplitter));
             ViewTypes.Add("GridSplitterHandle", typeof(GridSplitterHandle));
             ViewTypes.Add("InputField", typeof(InputField));
-            ViewTypes.Add("Region", typeof(Region));
             ViewTypes.Add("RectMask2D", typeof(RectMask2D));
             ViewTypes.Add("LayoutRoot", typeof(LayoutRoot));
             ViewTypes.Add("NavigationButton", typeof(NavigationButton));
@@ -135,10 +139,8 @@ namespace Delight
             ViewTypes.Add("TabPanelExample", typeof(TabPanelExample));
             ViewTypes.Add("TestExample", typeof(TestExample));
             ViewTypes.Add("MainGameScene", typeof(MainGameScene));
-            ViewTypes.Add("MainMenuDemoScene", typeof(MainMenuDemoScene));
-            ViewTypes.Add("MainGameView", typeof(MainGameView));
             ViewTypes.Add("MainMenuScene", typeof(MainMenuScene));
-            ViewTypes.Add("MainMenuView", typeof(MainMenuView));
+            ViewTypes.Add("MainMenuDemoScene", typeof(MainMenuDemoScene));
 
             AttachedPropertyActivators = new Dictionary<string, Func<View, string, AttachedProperty>>();
             AttachedPropertyActivators.Add("System.Int32", (x, y) => new AttachedProperty<System.Int32>(x, y));

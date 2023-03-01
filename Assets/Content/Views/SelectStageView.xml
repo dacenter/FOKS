@@ -1,0 +1,17 @@
+<SelectStageView xmlns="Delight" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="Delight ../Delight.xsd"
+                 PrevActive="t:bool = true" NextActive="t:bool = true" StageName="t:string" StageActive="t:bool" StageLogo="t:UnityEngine.Sprite">
+    <Button Text="{StageName}" Width="75%" Height="80%" Alignment="Center"
+            Margin="20px, 20px, 20px, 20px"
+            Style="MenuButton" Click="Select" IsDisabled="{!StageActive}">
+        <Image Width="90%" Height="90%" Sprite="{StageLogo}" PreserveAspect="true" Material="StageLogoMaterial"/>
+    </Button>
+    <Label Text="{StageName}" Width="50%" Height="100px" Alignment="Bottom" Margin="0,0,0,50px" Style="MenuLabel"/>
+    <Button Text="&lt;" Width="10%" Height="10%" Alignment="Left"
+            Margin="50px, 20px, 20px, 20px"
+            Style="MenuButton" Click="SelectPrevStage" IsVisible="{PrevActive}">
+    </Button>
+    <Button Text="&gt;" Width="10%" Height="10%" Alignment="Right"
+            Margin="20px, 20px, 50px, 20px"
+            Style="MenuButton" Click="SelectNextStage" IsVisible="{NextActive}">
+    </Button>
+</SelectStageView>

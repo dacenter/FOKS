@@ -179,7 +179,7 @@ namespace Delight
                     _mainMenuSceneMainMenuView1Button2 = new Template(MainMenuViewTemplates.MainMenuViewButton2);
 #if UNITY_EDITOR
                     _mainMenuSceneMainMenuView1Button2.Name = "MainMenuSceneMainMenuView1Button2";
-                    _mainMenuSceneMainMenuView1Button2.LineNumber = 6;
+                    _mainMenuSceneMainMenuView1Button2.LineNumber = 7;
                     _mainMenuSceneMainMenuView1Button2.LinePosition = 6;
 #endif
                     Delight.Button.LabelTemplateProperty.SetDefault(_mainMenuSceneMainMenuView1Button2, MainMenuSceneMainMenuView1Button2Label);
@@ -224,7 +224,7 @@ namespace Delight
                     _mainMenuSceneMainMenuView1Button3 = new Template(MainMenuViewTemplates.MainMenuViewButton3);
 #if UNITY_EDITOR
                     _mainMenuSceneMainMenuView1Button3.Name = "MainMenuSceneMainMenuView1Button3";
-                    _mainMenuSceneMainMenuView1Button3.LineNumber = 9;
+                    _mainMenuSceneMainMenuView1Button3.LineNumber = 11;
                     _mainMenuSceneMainMenuView1Button3.LinePosition = 6;
 #endif
                     Delight.Button.LabelTemplateProperty.SetDefault(_mainMenuSceneMainMenuView1Button3, MainMenuSceneMainMenuView1Button3Label);

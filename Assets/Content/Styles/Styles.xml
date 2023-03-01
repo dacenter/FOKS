@@ -1,3 +1,11 @@
 <Styles>
   <!-- Style File -->
+  <Button Style="MenuButton" BackgroundSprite="Pxiel Art UI borders_0"
+          FontSize="24" FontColor="#ffffff" Font="Fifaks10Dev1"
+          Highlighted-FontColor="#FFFFE478" Highlighted-FontSize="30" Pressed-BackgroundColor="#ffB0305C">
+  </Button>
+  <Label Style="MenuLabel" BackgroundSprite="Pxiel Art UI borders_0"
+          FontSize="24" FontColor="#ffffff" Font="Fifaks10Dev1"
+          >
+  </Label>
 </Styles>  

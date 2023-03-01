@@ -1,13 +1,15 @@
 <MainMenuView xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Delight"
               xsi:schemaLocation="Delight ../Delight.xsd">
-    <Button Text="НАЧАТЬ" Width="50%" Height="25%" BackgroundSprite="Pxiel Art UI borders_0" Alignment="Top"
-            FontSize="24" FontColor="#ffffff" Font="Fifaks10Dev1" Margin="10px, 10px, 10px, 10px" 
-            Highlighted-FontColor="#ffffff00" Highlighted-FontSize="30">
+    <Button Text="НАЧАТЬ" Width="50%" Height="75px" Alignment="Center"
+            Margin="10px, 10px, 10px, 10px"
+            Style="MenuButton" Click="StartGame">
     </Button>
-    <Button Text="НАСТРОЙКИ" Width="20%" Height="15%" BackgroundSprite="Pxiel Art UI borders_0" Alignment="BottomLeft"
-            FontSize="24" FontColor="#ffffff" Font="Fifaks10Dev1" Margin="10px, 10px, 10px, 10px">
+    <Button Text="НАСТРОЙКИ" Width="20%" Height="100px" Alignment="BottomLeft"
+            Margin="50px, 0px, 0px, 50px"
+            Style="MenuButton" Click="Settings">
     </Button>
-    <Button Text="ВЫХОД" Width="20%" Height="15%" BackgroundSprite="Pxiel Art UI borders_0" Alignment="BottomRight"
-            FontSize="24" FontColor="#ffffff" Font="Fifaks10Dev1" Margin="10px, 10px, 10px, 10px">
+    <Button Text="ВЫХОД" Width="20%" Height="100px" Alignment="BottomRight"
+            Margin="0px, 0px, 50px, 50px"
+            Style="MenuButton" Click="Exit">
     </Button>
 </MainMenuView>

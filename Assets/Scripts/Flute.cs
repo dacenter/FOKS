@@ -50,7 +50,7 @@ public class Flute : MonoBehaviour
     private void PlayNote(int shift)
     {
         float volume = 0.8f+Random.Range(-0.2f, 0.2f);
-        float pitch = Mathf.Pow(Multiplier, shift);
+        float pitch = Mathf.Pow(Multiplier, shift-2);
         
         AudioSource.DOFade(volume, AttackVolumeTime);
         AudioSource.DOPitch(pitch, AttckPitchTime);
