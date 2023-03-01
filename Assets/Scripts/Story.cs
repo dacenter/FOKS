@@ -1,3 +1,4 @@
+using System.Collections;
 using Delight;
 using Ink.Runtime;
 using JSAM;
@@ -10,6 +11,8 @@ public class Story : MonoBehaviour
 
     [SerializeField] private Ink.Runtime.Story story;
 
+    public bool CanContinue = true;
+
 
     private void Awake()
     {
@@ -19,26 +22,39 @@ public class Story : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        JSAM.AudioManager.PlayMusic(AudioLibraryMusic.OST);
+        
+        
+        
         story = new Ink.Runtime.Story(InkJsonAsset.text);
         
-
-
         story.BindExternalFunction<float>("wait", time => { Invoke("Continue", time); });
 
 
+        story.BindExternalFunction<string>("wait_melody", melody =>
+        {
+            StartCoroutine(WaitMelody(melody));
+        });
+        story.BindExternalFunction<int>("set_form", num =>
+        {
+            FindObjectOfType<Player>().ChangeForm(num);
+        });
+        
+        JSAM.AudioManager.PlayMusic(AudioLibraryMusic.OST);
         Continue();
     }
 
-    // Update is called once per frame
-    private void Update()
+    private IEnumerator WaitMelody(string melody)
     {
+        CanContinue = false;
+        yield return new WaitUntil(() => FindObjectOfType<Flute>().GetLastMelody()==melody);
+        CanContinue = true;
+        Continue();
     }
+    
 
     public void OnTrigger(string triggerName)
     {
         Path path = new Path($"trigger_{triggerName}");
-        Debug.Log(story.variablesState[$"trigger_{triggerName}_visits"]);
         story.variablesState[$"trigger_{triggerName}_visits"] = 
             (int) story.variablesState[$"trigger_{triggerName}_visits"] + 1;
         story.ChoosePath(path);
@@ -51,6 +67,8 @@ public class Story : MonoBehaviour
 
     public void Continue()
     {
+        if (!CanContinue) return;
+        
         if (story.canContinue)
         {
             string text = "";
@@ -59,23 +77,9 @@ public class Story : MonoBehaviour
                 if (story.canContinue)
                 {
                     text = story.Continue();
-                    Debug.Log(text);
 
 
-                    if (story.currentTags.Count > 0)
-                        switch (story.currentTags[0])
-                        {
-                            case "enableInput":
-                                UsePlayerInput(true);
-                                break;
-                            case "disableInput":
-
-                                UsePlayerInput(false);
-                                break;
-                            case "hide":
-                                MainGameView.IsShow = false;
-                                break;
-                        }
+                    if (story.currentTags.Count > 0) ParseTags();
                 }
                 else
                 {
@@ -89,6 +93,23 @@ public class Story : MonoBehaviour
         else
         {
             MainGameView.IsShow = false;
+        }
+    }
+
+    private void ParseTags()
+    {
+        switch (story.currentTags[0])
+        {
+            case "enableInput":
+                UsePlayerInput(true);
+                break;
+            case "disableInput":
+
+                UsePlayerInput(false);
+                break;
+            case "hide":
+                MainGameView.IsShow = false;
+                break;
         }
     }
 

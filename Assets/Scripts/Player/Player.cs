@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
 
             //Debug.Log(movement);
-            CharacterController.Move(movement, false, jump);
+            CharacterController.Move(movement, jump);
 
 
             if (Input.GetKeyDown(KeyCode.F)) ChangeForm(1);
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
 
         Animator = CurrentForm.transform.GetComponent<Animator>();
-
+        CharacterController.MaxSpeed = CurrentForm.MaxSpeed;
         CharacterController.CeilingCheck = CurrentForm.TopAnchor;
         CharacterController.GroundCheck = CurrentForm.BottomAnchor;
 

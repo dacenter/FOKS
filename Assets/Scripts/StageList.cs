@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,12 +9,8 @@ public class StageList:MonoBehaviour
        private List<Stage> Stages;
        [SerializeField]
        public int CurrentIndex;
-
-
-       public Stage SelectedStage
-       {
-              get => Stages[CurrentIndex];
-       }
+       
+       public Stage SelectedStage => Stages[CurrentIndex];
 
        public bool CanNext => CurrentIndex < Stages.Count - 1;
 
@@ -24,9 +18,7 @@ public class StageList:MonoBehaviour
 
        public bool CanLoad => SelectedStage.Active;
 
-       public event Action Changed = delegate {  };
 
-       
        public static StageList Instance => _instance;
        private static StageList _instance;
 

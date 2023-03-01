@@ -5,15 +5,11 @@ public class CharacterController2D : MonoBehaviour
 {
     [SerializeField] private float JumpForce = 400f; // Amount of force added when the player jumps.
 
-    [Range(0, 1)] [SerializeField]
-    private float CrouchSpeed = .36f; // Amount of maxSpeed applied to crouching movement. 1 = 100%
-
     [Range(0, .3f)] [SerializeField] private float MovementSmoothing = .05f; // How much to smooth out the movement
     [SerializeField] public bool AirControl = false; // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask WhatIsGround; // A mask determining what is ground to the character
     [SerializeField] public Transform GroundCheck; // A position marking where to check if the player is grounded.
     [SerializeField] public Transform CeilingCheck; // A position marking where to check for ceilings
-    [SerializeField] private Collider2D CrouchDisableCollider; // A collider that will be disabled when crouching
     [SerializeField] private float GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     public bool Grounded; // Whether or not the player is grounded.
     const float CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
@@ -28,8 +24,7 @@ public class CharacterController2D : MonoBehaviour
     {
     }
 
-    public BoolEvent OnCrouchEvent;
-    private bool wasCrouching = false;
+
     public float MaxSpeed;
 
     private void Awake()
@@ -38,9 +33,6 @@ public class CharacterController2D : MonoBehaviour
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
-
-        if (OnCrouchEvent == null)
-            OnCrouchEvent = new BoolEvent();
     }
 
 
@@ -65,50 +57,11 @@ public class CharacterController2D : MonoBehaviour
     }
 
 
-    public void Move(float move, bool crouch, bool jump)
+    public void Move(float move, bool jump)
     {
-        // If crouching, check to see if the character can stand up
-        if (!crouch)
-        {
-            // If the character has a ceiling preventing them from standing up, keep them crouching
-            if (Physics2D.OverlapCircle(CeilingCheck.position, CeilingRadius, WhatIsGround))
-            {
-                crouch = true;
-            }
-        }
-
         //only control the player if grounded or airControl is turned on
         if (Grounded || AirControl)
         {
-            // If crouching
-            if (crouch)
-            {
-                if (!wasCrouching)
-                {
-                    wasCrouching = true;
-                    OnCrouchEvent.Invoke(true);
-                }
-
-                // Reduce the speed by the crouchSpeed multiplier
-                move *= CrouchSpeed;
-
-                // Disable one of the colliders when crouching
-                if (CrouchDisableCollider != null)
-                    CrouchDisableCollider.enabled = false;
-            }
-            else
-            {
-                // Enable the collider when not crouching
-                if (CrouchDisableCollider != null)
-                    CrouchDisableCollider.enabled = true;
-
-                if (wasCrouching)
-                {
-                    wasCrouching = false;
-                    OnCrouchEvent.Invoke(false);
-                }
-            }
-
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(move * MaxSpeed, Rigidbody2D.velocity.y);
             // And then smoothing it out and applying it to the character

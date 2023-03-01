@@ -1,13 +1,16 @@
 EXTERNAL wait(time)
+EXTERNAL wait_melody(name)
+EXTERNAL set_form(id)
 
 VAR trigger_big_stone_visits = 0
 VAR trigger_beyound_big_stone_visits = 0
+VAR trigger_after_fear_visits = 0
 
 -> start
 
 === start ===
 #disableInput
-Кто я?
+'Кто я? ~~~Нажмите "T"~~~ '
 Где я?
 Что это такое вокруг?
 #enableInput
@@ -33,7 +36,31 @@ VAR trigger_beyound_big_stone_visits = 0
 Оказывается я достаточно ловкий, значит со мной точно будет интересно и я буду полезен!
 '*** хоть вокруг и темно, я что-то вижу впереди, надо бежать посмотреть! ***'
 } #hide
+{ trigger_beyound_big_stone_visits > 1:
+Идти дальше, не оглядываясь!
+} #hide
 ->DONE 
+
+
+=== trigger_after_fear ===
+{trigger_after_fear_visits ==1:
+ЧТО ЭТО БЫЛО #disableInput
+'*** лисенок попытался хоть как-то справится с окружающей его темнотой'
+'и вспомнил мелодию из глубин своей души'
+'попробуйте наиграть её, используя клавиши NumPad'
+~ wait_melody("owl_melody")
+'Подсказка: 0 5 6 4 5'
+Отлично!
+~ set_form(1)
+ЧТО ПРОИЗОШЛО?
+Почему я могу летать?
+Не важно
+Зато теперь я смогу улететь от этого страшного..
+злобного...
+ужасного...
+ААААААААААААА
+} #hide
+->DONE
 
 
 

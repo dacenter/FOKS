@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Flute : MonoBehaviour
 {
@@ -13,6 +17,19 @@ public class Flute : MonoBehaviour
 
     [SerializeField] private AudioSource AudioSource;
 
+
+    public Queue<int> Last4PlayedNotes;
+
+    private int LastHoldedNote;
+
+
+
+    public string OwlMelody = "0;7;8;5;";
+
+    private void Awake()
+    {
+        Last4PlayedNotes = new Queue<int>();
+    }
 
     // Update is called once per frame
     private void Update()
@@ -44,16 +61,44 @@ public class Flute : MonoBehaviour
         else if (Input.GetKey(KeyCode.Keypad8))
             PlayNote(12);
         else
-            GetComponent<AudioSource>().DOFade(0, ReleaseVolumeTime);
+        {
+            
+            DOTween.To(() => JSAM.AudioManager.MusicVolume, JSAM.AudioManager.SetMusicVolume, 1f, 1f);
+            
+            AudioSource.DOFade(0, ReleaseVolumeTime);
+        }
+        
+    }
+
+    public string GetLastMelody()
+    {
+        var melodyString = String.Concat(Last4PlayedNotes.ToArray().Select(s => $"{s};"));
+        switch (melodyString)
+        {
+            case "0;7;8;5;":
+                return "owl_melody";
+                break;
+            default: return "none";
+        }
     }
 
     private void PlayNote(int shift)
     {
+        DOTween.To(() => JSAM.AudioManager.MusicVolume, JSAM.AudioManager.SetMusicVolume, 0.33f, 1f);
+        
         float volume = 0.8f+Random.Range(-0.2f, 0.2f);
-        float pitch = Mathf.Pow(Multiplier, shift-2);
+        float pitch = Mathf.Pow(Multiplier, shift-3);
         
         AudioSource.DOFade(volume, AttackVolumeTime);
         AudioSource.DOPitch(pitch, AttckPitchTime);
+        
+        
+        if(LastHoldedNote!=shift)
+            Last4PlayedNotes.Enqueue(LastHoldedNote);
+
+        while (Last4PlayedNotes.Count > 4) Last4PlayedNotes.Dequeue();
+        
+        LastHoldedNote = shift;
         
     }
 }

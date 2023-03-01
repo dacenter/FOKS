@@ -9,5 +9,5 @@ public class CharacterBody : MonoBehaviour
     public Transform BottomAnchor;
 
     public bool Flying;
-
+    public float MaxSpeed;
 }
