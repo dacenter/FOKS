@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -10,6 +11,8 @@ public class Enemy:MonoBehaviour
         private Vector3 speed;
 
         private bool spawning;
+
+        private Transform target;
         private void Start()
         {
         }
@@ -38,39 +41,50 @@ public class Enemy:MonoBehaviour
                 
         }
         
+        private Transform GetClosestEnemy()
+        {
+                var enemies = FindObjectsOfType<Health>();
+                Transform tMin = null;
+                float minDist = Mathf.Infinity;
+                Vector3 currentPos = transform.position;
+                foreach (var t in enemies)
+                {
+                        float dist = Vector3.Distance(t.transform.position, currentPos);
+                        if (dist < minDist)
+                        {
+                                tMin = t.transform;
+                                minDist = dist;
+                        }
+                }
+                return tMin;
+        }
+        
 
 
         private void Update()
         {
                 var distanceVector = GameObject.Find("Player").transform.position - transform.position;
-                if (distanceVector.magnitude > 4)
+                if (distanceVector.magnitude > 7)
                 {
                         GetComponentInChildren<VisualEffect>().Stop();
                         Invoke("CancelAttack", 3);
                 }
                 else
                 {
-                        if (!GetComponentInChildren<VisualEffect>().enabled)
-                        {
-                                GetComponentInChildren<VisualEffect>().enabled = true;
-                                
-                                GetComponentInChildren<VisualEffect>().Play();
-                        }
-                        
-                        
-                        GetComponentInChildren<VisualEffect>().SetVector3("Target",distanceVector );
-                        
-                        if(GetComponentInChildren<VisualEffect>().enabled)
-                                GameObject.Find("Player").GetComponent<Health>().DoDamage(Time.deltaTime);
+                        Debug.Log("AI RUNNING");
+                        this.target = GetClosestEnemy();
+                        GetClosestEnemy().GetComponent<Health>().DoDamage(1*Time.deltaTime);
+                        GetComponentInChildren<VisualEffect>().enabled = true;
+                        GetComponentInChildren<VisualEffect>().Play();
                 }
                 
                 
                 
                 if (distanceVector.magnitude < 6)
                 {
-                        var targetPosition = GameObject.Find("Player").transform.position -
+                        var targetPosition =target.position-
                                              (distanceVector * (3f / distanceVector.magnitude));
-                        targetPosition.y = GameObject.Find("Player").transform.position.y;
+                        targetPosition.y = target.position.y;
                         transform.position = Vector3.SmoothDamp(transform.position,targetPosition
                                 , ref speed, Mathf.Max(100f * Time.deltaTime, 0.1f));
 

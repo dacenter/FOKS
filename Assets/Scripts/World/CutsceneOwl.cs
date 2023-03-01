@@ -19,15 +19,22 @@ public class CutsceneOwl : MonoBehaviour
     private void Update()
     {
         
-        if ((transform.position - CurrentTarget.position).magnitude<0.1f)
+        if ((transform.position - CurrentTarget.position).magnitude<1f)
         {
-            CurrentTarget = CurrentTarget == FirstPoint ? SecondPoint : FirstPoint;
+            CurrentTarget = SecondPoint;
 
 
             
         }
-        var targetPosition = CurrentTarget.position;
-        transform.position = Vector3.SmoothDamp(transform.position,targetPosition
-            , ref speed, Mathf.Max(500f * Time.deltaTime, 0.1f));
+        
+        
+        
+        GetComponent<CharacterController2D>().Move((CurrentTarget.position-transform.position).normalized.x,false);
+
+
+        if (GetComponent<Health>().CurrentHP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

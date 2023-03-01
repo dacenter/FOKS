@@ -35,6 +35,10 @@ public class CharacterController2D : MonoBehaviour
             OnLandEvent = new UnityEvent();
     }
 
+    public void Stop()
+    {
+        Rigidbody2D.velocity = new Vector2(0, Rigidbody2D.velocity.y);
+    }
 
 
     private void FixedUpdate()

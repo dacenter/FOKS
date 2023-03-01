@@ -32,6 +32,11 @@ public class Player : MonoBehaviour
         ChangeForm(0);
     }
 
+    public void StopMoving()
+    {
+        CharacterController.Stop();
+    }
+
 
     private void Update()
     {
@@ -51,7 +56,9 @@ public class Player : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E)) ChangeForm(0);
         }
-
+        /*else
+            CharacterController.Move(0, false);*/
+        
         Animator.SetBool("IsJumping", !CharacterController.Grounded);
 
         if (FindObjectOfType<Volume>().profile.TryGet(out ShadowsMidtonesHighlights output))

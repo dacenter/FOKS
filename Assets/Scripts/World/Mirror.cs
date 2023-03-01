@@ -9,6 +9,8 @@ public class Mirror:MonoBehaviour
 {
         public float XShift;
         public float YShift;
+
+        [SerializeField] private Camera MirrorCamera;
         public void Update()
         {
                 var distance = Camera.main.transform.position - transform.position;
@@ -27,32 +29,35 @@ public class Mirror:MonoBehaviour
 
         private IEnumerator Glitching()
         {
+                var mirrorCamera = GameObject.Find("MirrorCamera").GetComponent<Camera>();
                 while (true)
                 {
-                        GameObject.Find("MirrorCamera").GetComponent<Camera>().cullingMask =~LayerMask.GetMask("Hidden");
-                        yield return new WaitForSeconds(Random.Range(0.1f, 0.8f));
+                        MirrorCamera.cullingMask =~LayerMask.GetMask("Hidden");
+                        yield return new WaitForSeconds(Random.Range(0f, 0.8f));
                         
-                        GameObject.Find("MirrorCamera").GetComponent<Camera>().cullingMask =~LayerMask.GetMask("Player");
-                        yield return new WaitForSeconds(Random.Range(0.1f, 0.8f));
+                        MirrorCamera.cullingMask =~LayerMask.GetMask("Player");
+                        yield return new WaitForSeconds(Random.Range(0f, 0.8f));
                 }
         }
 
 
         public void EndLevel()
         {
-                Debug.Log("Ends level");
                 Light2D light = GetComponentInChildren<Light2D>();
                 
-                DOTween.To(()=>light.intensity, x=>light.intensity=x, 5f, 4f);
+                DOTween.To(()=>light.intensity, x=>light.intensity=x, 2f, 4f).OnComplete(() =>
+                {
+                        DOTween.To(() => light.intensity, x => light.intensity = x, 200000f, 1f);
+                });
                 Invoke("FreezePlayer", 0.05f);
 
         }
 
         public void FreezePlayer()
         {
-                
-                FindObjectOfType<Player>().GetComponentInChildren<CharacterController2D>().enabled = false;
-                FindObjectOfType<Player>().RecieveInput = false;
-                FindObjectOfType<Player>().transform.position = transform.position;
+                var player = FindObjectOfType<Player>();
+                player.StopMoving();
+                player.RecieveInput = false;
+                player.transform.position = new Vector3(transform.position.x, player.transform.position.y, player.transform.position.z);
         }
 }

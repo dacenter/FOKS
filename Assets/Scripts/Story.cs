@@ -22,9 +22,6 @@ public class Story : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
-        
-        
         story = new Ink.Runtime.Story(InkJsonAsset.text);
         
         story.BindExternalFunction<float>("wait", time => { Invoke("Continue", time); });
@@ -34,9 +31,15 @@ public class Story : MonoBehaviour
         {
             StartCoroutine(WaitMelody(melody));
         });
+        
         story.BindExternalFunction<int>("set_form", num =>
         {
             FindObjectOfType<Player>().ChangeForm(num);
+        });
+        
+        story.BindExternalFunction("cutscene_owl", () =>
+        {
+            StartCoroutine(OwlCutscene());
         });
         
         JSAM.AudioManager.PlayMusic(AudioLibraryMusic.OST);
@@ -114,8 +117,20 @@ public class Story : MonoBehaviour
     }
 
 
-    public void UsePlayerInput(bool use)
+    private void UsePlayerInput(bool use)
     {
-        FindObjectOfType<Player>().RecieveInput = use;
+        var player = FindObjectOfType<Player>();
+        
+        player.RecieveInput = use;
+        
+        if(!use) player.StopMoving();
+    }
+
+
+    private IEnumerator OwlCutscene()
+    {
+        Debug.Log("CUTSCENE");
+        GameObject.Find("cutscene_owl").GetComponent<CutsceneOwl>().enabled = true;
+        yield break;
     }
 }

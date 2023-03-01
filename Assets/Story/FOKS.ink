@@ -1,17 +1,20 @@
 EXTERNAL wait(time)
 EXTERNAL wait_melody(name)
 EXTERNAL set_form(id)
+EXTERNAL cutscene_owl()
 
 VAR trigger_big_stone_visits = 0
 VAR trigger_beyound_big_stone_visits = 0
 VAR trigger_after_fear_visits = 0
+VAR trigger_end_visits = 0
+VAR trigger_owl_visits = 0
+VAR trigger_fear_visits = 0
 
 -> start
 
 === start ===
-#disableInput
 'Кто я? ~~~Нажмите "T"~~~ '
-Где я?
+Где я?#disableInput
 Что это такое вокруг?
 #enableInput
 ~wait(2)
@@ -41,6 +44,22 @@ VAR trigger_after_fear_visits = 0
 } #hide
 ->DONE 
 
+=== trigger_owl===
+{ trigger_owl_visits == 1:
+#disableInput
+О, привет
+~ cutscene_owl()
+Странное создание: УХУ - УХУ
+Стой куда-ты... #enableInput
+} #hide
+->DONE 
+
+=== trigger_fear===
+{ trigger_fear_visits == 1:
+AAAAAAAAAAAAAAAAAAA, БЕЖАТЬ
+} #hide
+->DONE 
+
 
 === trigger_after_fear ===
 {trigger_after_fear_visits ==1:
@@ -58,10 +77,24 @@ VAR trigger_after_fear_visits = 0
 Зато теперь я смогу улететь от этого страшного..
 злобного...
 ужасного...
-ААААААААААААА
+ААААААААААААА #enableInput
 } #hide
 ->DONE
 
+
+=== trigger_end ===
+{trigger_end_visits ==1:
+~ set_form(0)
+#disableInput
+Я снова вижу себя лисенком! Ура) 
+И этот свет кажется совсем не злобный, в отличие от тех глазков ночи...
+БРРРРР
+Но почему я вижу еще кого-то...
+Мне кажется если я подойду поближе...
+#enableInput
+КОНЕЦ ПЕРВОЙ ГЛАВЫ
+} #hide
+->DONE
 
 
 
