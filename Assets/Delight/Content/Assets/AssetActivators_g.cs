@@ -74,6 +74,8 @@ namespace Delight
             ViewActivators.Add("MainGameScene", (x, y, z, w, a) => new MainGameScene(x, y, z, w, a));
             ViewActivators.Add("MainMenuDemoScene", (x, y, z, w, a) => new MainMenuDemoScene(x, y, z, w, a));
             ViewActivators.Add("MainGameView", (x, y, z, w, a) => new MainGameView(x, y, z, w, a));
+            ViewActivators.Add("MainMenuScene", (x, y, z, w, a) => new MainMenuScene(x, y, z, w, a));
+            ViewActivators.Add("MainMenuView", (x, y, z, w, a) => new MainMenuView(x, y, z, w, a));
 
             ViewTypes = new Dictionary<string, Type>();
             ViewTypes.Add("SceneObjectView", typeof(SceneObjectView));
@@ -135,6 +137,8 @@ namespace Delight
             ViewTypes.Add("MainGameScene", typeof(MainGameScene));
             ViewTypes.Add("MainMenuDemoScene", typeof(MainMenuDemoScene));
             ViewTypes.Add("MainGameView", typeof(MainGameView));
+            ViewTypes.Add("MainMenuScene", typeof(MainMenuScene));
+            ViewTypes.Add("MainMenuView", typeof(MainMenuView));
 
             AttachedPropertyActivators = new Dictionary<string, Func<View, string, AttachedProperty>>();
             AttachedPropertyActivators.Add("System.Int32", (x, y) => new AttachedProperty<System.Int32>(x, y));

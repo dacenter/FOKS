@@ -1,0 +1,13 @@
+<MainMenuView xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="Delight"
+              xsi:schemaLocation="Delight ../Delight.xsd">
+    <Button Text="НАЧАТЬ" Width="50%" Height="25%" BackgroundSprite="Pxiel Art UI borders_0" Alignment="Top"
+            FontSize="24" FontColor="#ffffff" Font="Fifaks10Dev1" Margin="10px, 10px, 10px, 10px" 
+            Highlighted-FontColor="#ffffff00" Highlighted-FontSize="30">
+    </Button>
+    <Button Text="НАСТРОЙКИ" Width="20%" Height="15%" BackgroundSprite="Pxiel Art UI borders_0" Alignment="BottomLeft"
+            FontSize="24" FontColor="#ffffff" Font="Fifaks10Dev1" Margin="10px, 10px, 10px, 10px">
+    </Button>
+    <Button Text="ВЫХОД" Width="20%" Height="15%" BackgroundSprite="Pxiel Art UI borders_0" Alignment="BottomRight"
+            FontSize="24" FontColor="#ffffff" Font="Fifaks10Dev1" Margin="10px, 10px, 10px, 10px">
+    </Button>
+</MainMenuView>
